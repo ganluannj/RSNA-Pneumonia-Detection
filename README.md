@@ -34,7 +34,9 @@ This Batch normalization layer is followed by a Leaky ReLu layer. Same as ReLu, 
 The structure of block 2 is shown below. Clearly the architecture is Batch Normalization - Leaky ReLu - Convolution - Batch Normalization - Leaky ReLu - Convolution. As mentioned above, for a better visual effect, the size and depth of each layer is not drawn corrording their real values. There is a pooling layer in block 1 and the pooling size is 2. Thus after one repeat of the repeating block, the size of the feature map is reduced by 1/2. The number of kernels used for each repeat doubles after the previous repeat. Thus the depth depth doubles after each repeat. 
 ![CNN-5](https://user-images.githubusercontent.com/47232632/57199150-cd597b00-6f49-11e9-994e-7af34fa35a14.png)
 
-
+### 2.3 Model training 
+The total training images are randomly divided into the training dataset (90%) and validation dataset (10%). 
+#### 2.3.1 Loss function
 
 
 The learning rate is updated by cosine annealing: <br />
