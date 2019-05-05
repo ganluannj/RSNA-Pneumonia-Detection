@@ -15,7 +15,7 @@ Before discussing data generator I would like to talk about Data augmentation. T
 
 To train our model, we can directly feed our training data into the training model all at once. However, this requires that our entire training set can fit into RAM and we do not need to do any data augmentation (What is 'data augmentation' is explained below). However, for this challenge here, the data set is too large and cannot be fitted into memory all at once. Also to get a better model performance, we want to apply data augmentation. Thus we need data generator. 
 
-For Data generator, we start by initializing the number of epoches we are going to train our model and the batch size. Here is the epochs selected is 25 :+1: and batch size is 32.  The we need to define our augmentation method. We read the image data as a numpy array. Here I did a horizontal flip for half of the images as the augmentation. 
+For Data generator, we start by initializing the number of epoches we are going to train our model and the batch size. Here is the epochs selected is 25 :+1: and batch size is 32. Both of these two hyperparameters are limitted by the fact that Colab can only run upto 12 hours and also the memory of Colab. We read each image data as a numpy array. For training and validataion data, a mask array with the same size of the image was also created to represent the bounding box. The values in mask arary of locations corresponding to bounding area are 1 while the rest are 0.  Both the images and masks are resized from (1024, 1024) to (256, 256) to reduce the running time. Also I did a horizontal flip for half of the images as the augmentation. 
 
 
 The learning rate is updated by cosine annealing: <br />
