@@ -37,7 +37,8 @@ The structure of block 2 is shown below. Clearly the architecture is Batch Norma
 ### 2.3 Model training 
 The total training images are randomly divided into the training dataset (90%) and validation dataset (10%). 
 #### 2.3.1 Loss function
-The loss function to be optimized is composed by two parts: the Interaction over Union loss (IoU) and the binary crossentropy loss. IoU is commonly used in image segmentation or bounding box problems. The idea is shown below. 
+The loss function to be optimized is composed by two parts: the Interaction over Union loss (IoU) and the binary crossentropy loss. IoU is commonly used in image segmentation or bounding box problems. The idea is shown below. The red box represents the ground truth and the black box represent the predicted box. IoU equals to the ratio of intersectin of these two boxes over the union of these two boxes. Easy to see that the higher IoU is, the better the predicted result. 1-IoU was used as the IoU loss. The crossentropy loss is commonly used loss for classification. The boxing problem can be regarded as a classficiation problem in the sense that the boxed locations are 1 while the rest are 0. Binary crossentropy is defined as 
+
 <img width="289" alt="IoU" src="https://user-images.githubusercontent.com/47232632/57199522-e9f7b200-6f4d-11e9-9696-1f400b7d61c6.png">
 
 
