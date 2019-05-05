@@ -22,7 +22,7 @@ For Data generator, we start by initializing the number of epoches we are going 
 As we learned in class, convolutional neural network (CNN) is a specialized kind of neural network for processing data that a known grid-like topology, such as iamge data. Convolutional networks are simply neural networks that use convolution in place of general matrix mulitiplication in at least one of there layers. CNN has several advantages, such as sparse interactions, parameter sharing, and invariant to translations. The basic CNN architecture includes convluation layers, pooling layers, and one fully connected layer. We used CNN to build our model. 
 
 ### 2.2 Model Architecture
-The total architecture is composed by blocks as shown below. The input layer is followed by a convolutional layer. After that there are :+1: repeats of the repeating blocks. The repeating block contains one block_1 and two block_2 (explained below). The last is the output layer.  
+The total architecture is composed by blocks as shown below. The input layer is followed by a convolutional layer. After that there are 4 repeats of the repeating blocks. The repeating block contains one block_1 and two block_2 (explained below). The last is the output layer.  
 ![CNN-2](https://user-images.githubusercontent.com/47232632/57198281-edd00800-6f3e-11e9-9263-702cc170187b.png)
 
 The structure of block 1 is shown below (Please note that for a better visual effect, the layer and size are not drawn based on real values, same for block 2). The input layer is followed by a batch normalization layer (Batch normalization is a technique for improving  the speed, performance, and stability of the neural network. It is achieved through a normalization step that fixes the means and variances of each layer's inputs. It can reduce internal covariate shift. Besides this, with batch normalization layer, the model can use higher learning rate without vanishing or exploding gradients. Furthermore, batch normalization regularizes the network such that it is easier to generalize, and it is thus unnecessary to use dropout to mitigate overfitting. The network also becomes more robust to different initialization schemes and learning rates. Please refer to [wiki](https://en.wikipedia.org/wiki/Batch_normalization) for more details). 
@@ -31,7 +31,7 @@ This Batch normalization layer is followed by a Leaky ReLu layer. Same as ReLu, 
 ![CNN-4](https://user-images.githubusercontent.com/47232632/57198648-21149600-6f43-11e9-9a34-e35a1d4fc92f.png)
 
 
-The structure of block 2 is shown below. Clearly the architecture is Batch Normalization - Leaky ReLu - Convolution - Batch Normalization - Leaky ReLu - Convolution. As mentioned above, for a better visual effect, the size and depth of each layer is not drawn corrording their real values. There is a pooling layer in block 1 and the pooling size is 2. Thus after one repeat of the repeating block, the size of the feature map is reduced by 1/2. The number of kernels used for each repeat doubles after the previous repeat. Thus the depth depth doubles after each repeat. 
+The structure of block 2 is shown below. Clearly the architecture is Batch Normalization - Leaky ReLu - Convolution - Batch Normalization - Leaky ReLu - Convolution. As mentioned above, for a better visual effect, the size and depth of each layer is not drawn corrording their real values. There is a pooling layer in block 1 and the pooling size is 2. Thus after one repeat of the repeating block, the size of the feature map is reduced by 1/2. The initial number of kernels is 32. Then it doubles after each repeat. Thus the depth depth doubles after each repeat. 
 ![CNN-5](https://user-images.githubusercontent.com/47232632/57199150-cd597b00-6f49-11e9-994e-7af34fa35a14.png)
 
 ### 2.3 Model training 
@@ -42,7 +42,11 @@ The loss function to be optimized is composed by two parts: the Interaction over
 <img width="289" alt="IoU" src="https://user-images.githubusercontent.com/47232632/57199522-e9f7b200-6f4d-11e9-9696-1f400b7d61c6.png">
 
 #### 2.3.2 Learning Rate Annealing
-Learning rate is an important hyperparameter. Basically if the learning rate is too high, the parameter vector will change dramatically, and hard to settle down to get deeper. If the learning rate is too low, it usually takes a long time to train. Usually we need learning rate annealing during neural work training. Here we use the cosine annealing: <a href="https://www.codecogs.com/eqnedit.php?latex=lr*\frac{cos(\pi&space;x/n)&plus;1}{2}" target="_blank"><img src="https://latex.codecogs.com/svg.latex?lr*\frac{cos(\pi&space;x/n)&plus;1}{2}" title="lr*\frac{cos(\pi x/n)+1}{2}" /></a>,
+Learning rate is an important hyperparameter. Basically if the learning rate is too high, the parameter vector will change dramatically, and hard to settle down to get deeper. If the learning rate is too low, it usually takes a long time to train. Usually we need learning rate annealing during neural work training. Here we use the cosine annealing: 
+
+<a href="https://www.codecogs.com/eqnedit.php?latex=lr*\frac{cos(\pi&space;x/n)&plus;1}{2}" target="_blank"><img src="https://latex.codecogs.com/svg.latex?lr*\frac{cos(\pi&space;x/n)&plus;1}{2}" title="lr*\frac{cos(\pi x/n)+1}{2}" /></a>,
 <br /> where *lr* is the initial learning rete, *x* is the iteration number, and *n* is the total number of epochs. 
+
+
 
 
