@@ -23,6 +23,7 @@ As we learned in class, convolutional neural network (CNN) is a specialized kind
 
 ### 2.2 Model Architecture
 The total architecture is composed by blocks as shown below. 
+![CNN-2](https://user-images.githubusercontent.com/47232632/57198149-806fa780-6f3d-11e9-807a-c623a7bef11f.png)
 
 
 
