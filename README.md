@@ -22,7 +22,7 @@ For Data generator, we start by initializing the number of epoches we are going 
 As we learned in class, convolutional neural network (CNN) is a specialized kind of neural network for processing data that a known grid-like topology, such as iamge data. Convolutional networks are simply neural networks that use convolution in place of general matrix mulitiplication in at least one of there layers. CNN has several advantages, such as sparse interactions, parameter sharing, and invariant to translations. The basic CNN architecture includes convluation layers, pooling layers, and one fully connected layer. We used CNN to build our model. 
 
 ### 2.2 Model Architecture
-The total architecture is composed by blocks as shown below. 
+The total architecture is composed by blocks as shown below. The input layer is followed by a convolutional layer. After that there are :+1: repeats of the repeating blocks. The repeating block contains one block1 and two block2 (explained below). The last is the output layer.  
 ![CNN-2](https://user-images.githubusercontent.com/47232632/57198281-edd00800-6f3e-11e9-9263-702cc170187b.png)
 
 
