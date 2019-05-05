@@ -1,9 +1,9 @@
 # RSNA-Pneumonia-Detection
 
-## 0. Note
+## 0 Note
 Both the notebook and this file contains some explanation/tutorial. Basically, the notebook contains some simple explanation of the code and some direct interpretations of the output. This tutorial includes the explanation of several concepts which may help to understand the notebook.  <br />
 
-## 1. Data 
+## 1 Data 
 
 ### 1.1 Data uploading
 Different from the two challenges we did for midterm project, the data size for this challenge is huge (greater than 3GB) and data are medical image. For midterm project I used local machine (my PC) to run the code, however it is not quite possible to use my PC to run code for this challenge. I used GPU provided by Google Colaboratory instead. Then the first thing we need to upload the data into google Colab. 
@@ -16,6 +16,12 @@ Before discussing data generator I would like to talk about Data augmentation. T
 To train our model, we can directly feed our training data into the training model all at once. However, this requires that our entire training set can fit into RAM and we do not need to do any data augmentation (What is 'data augmentation' is explained below). However, for this challenge here, the data set is too large and cannot be fitted into memory all at once. Also to get a better model performance, we want to apply data augmentation. Thus we need data generator. 
 
 For Data generator, we start by initializing the number of epoches we are going to train our model and the batch size. Here is the epochs selected is 25 :+1: and batch size is 32. Both of these two hyperparameters are limitted by the fact that Colab can only run upto 12 hours and also the memory of Colab. We read each image data as a numpy array. For training and validataion data, a mask array with the same size of the image was also created to represent the bounding box. The values in mask arary of locations corresponding to bounding area are 1 while the rest are 0.  Both the images and masks are resized from (1024, 1024) to (256, 256) to reduce the running time. Also I did a horizontal flip for half of the images as the augmentation. 
+
+## 2 Model
+### 2.1 Convolutional Network
+As we learned in class, convolutional network (CNN) is a specialized kind of neural network for processing data that a known grid-like topology, such as iamge data. Convolutional networks are simply neural networks that use convolution in place of general matrix mulitiplication in at least one of there layers. CNN has several advantages, such as sparse interactions, parameter sharing, and invariant to translations. The basic CNN architecture includes convluation layers, pooling layers, and one fully connected layer. 
+
+
 
 
 The learning rate is updated by cosine annealing: <br />
