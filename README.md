@@ -1,4 +1,4 @@
-# RSNA-Pneumonia-Detection
+# Tutorial for the notebook
 
 ## 0 Note
 Both the notebook and this file contains some explanation/tutorial. Basically, the notebook contains some simple explanation of the code and some direct interpretations of the output. This tutorial includes the explanation of several concepts which may help to understand the notebook.  <br />
