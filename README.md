@@ -37,9 +37,12 @@ The structure of block 2 is shown below. Clearly the architecture is Batch Norma
 ### 2.3 Model training 
 The total training images are randomly divided into the training dataset (90%) and validation dataset (10%). 
 #### 2.3.1 Loss Function and Metric
-The loss function to be optimized is composed by two parts: the Interaction over Union loss (IoU) and the binary crossentropy loss. IoU is commonly used in image segmentation or bounding box problems. The idea is shown below. The red box represents the ground truth and the black box represent the predicted box. IoU equals to the ratio of intersectin of these two boxes over the union of these two boxes. Easy to see that the higher IoU is, the better the predicted result. *1-IoU* was used as the IoU loss. The crossentropy loss is commonly used loss for classification. The boxing problem can be regarded as a classficiation problem in the sense that the boxed locations are 1 while the rest are 0. Binary crossentropy is defined as 
-<a href="https://www.codecogs.com/eqnedit.php?latex=L=-[ylog(\hat{p}))&plus;&space;(1-y)log(1-\hat{p})]" target="_blank"><img src="https://latex.codecogs.com/svg.latex?L=-[ylog(\hat{p}))&plus;&space;(1-y)log(1-\hat{p})]" title="L=-[ylog(\hat{p}))+ (1-y)log(1-\hat{p})]" /></a> . The Loss function used was the average of IoU loss and the binary crossentropy loss. The mean of IoU from each sample of the batch was used as the metric function to track the performance of the model. 
+The loss function to be optimized is composed by two parts: the Interaction over Union loss (IoU) and the binary crossentropy loss. IoU is commonly used in image segmentation or bounding box problems. The idea is shown below. The red box represents the ground truth and the black box represent the predicted box. IoU equals to the ratio of intersectin of these two boxes over the union of these two boxes. Easy to see that the higher IoU is, the better the predicted result. *1-IoU* was used as the IoU loss. 
 <img width="289" alt="IoU" src="https://user-images.githubusercontent.com/47232632/57199522-e9f7b200-6f4d-11e9-9696-1f400b7d61c6.png">
+
+The crossentropy loss is commonly used loss for classification. The boxing problem can be regarded as a classficiation problem in the sense that the boxed locations are 1 while the rest are 0. Binary crossentropy is defined as 
+<a href="https://www.codecogs.com/eqnedit.php?latex=L=-[ylog(\hat{p}))&plus;&space;(1-y)log(1-\hat{p})]" target="_blank"><img src="https://latex.codecogs.com/svg.latex?L=-[ylog(\hat{p}))&plus;&space;(1-y)log(1-\hat{p})]" title="L=-[ylog(\hat{p}))+ (1-y)log(1-\hat{p})]" /></a> . The Loss function used was the average of IoU loss and the binary crossentropy loss. The mean of IoU from each sample of the batch was used as the metric function to track the performance of the model. 
+
 
 #### 2.3.2 Learning Rate Annealing
 Learning rate is an important hyperparameter. Basically if the learning rate is too high, the parameter vector will change dramatically, and hard to settle down to get deeper. If the learning rate is too low, it usually takes a long time to train. Usually we need learning rate annealing during neural work training. Here we use the cosine annealing: 
@@ -47,7 +50,7 @@ Learning rate is an important hyperparameter. Basically if the learning rate is 
 <a href="https://www.codecogs.com/eqnedit.php?latex=lr*\frac{cos(\pi&space;x/n)&plus;1}{2}" target="_blank"><img src="https://latex.codecogs.com/svg.latex?lr*\frac{cos(\pi&space;x/n)&plus;1}{2}" title="lr*\frac{cos(\pi x/n)+1}{2}" /></a>,
 <br /> where *lr* is the initial learning rete, *x* is the iteration number, and *n* is the total number of epochs. 
 
-#### 2.4 Model Prediction
+### 2.4 Model Prediction
 As montioned in Section 2.4, the output the the model is a numpy arrary which shows the probability of each pixel of the resized image of being in the bounding box. The output required by the challenge is a string which contains the location information of the box and confidence of the box. So first the numpy arrary was resized corresponding to the original image size (1024, 1024, 1). Te cut off threshold probability was set to be 0.5. The rectangle region with probability higher than 0.5 were identified and labelled as the predicted boxes. The location of the lower left corner, and hight, width of the rectangle was extracted. The confidience is simply the mean of the probability of all pixels in the bounding rectangle. 
 
 
